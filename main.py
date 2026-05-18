@@ -224,7 +224,7 @@ if pagina == "Contas a Pagar":
     )
 
     # Evolução mensal
-    df["Mes"] = df["Data Vencimento"].dt.month_name(locale='pt_BR')
+    df["Mes"] = df["Data Vencimento"].dt.month.map(meses)
 
     evolucao = df.groupby("Mes")["Valor"].sum().reset_index()
 
@@ -415,7 +415,7 @@ elif pagina == "Contas a Receber":
     )
 
     # Evolução mensal
-    df["Mes"] = df["Data Vencimento"].dt.month_name(locale='pt_BR')
+    df["Mes"] = df["Data Vencimento"].dt.month.map(meses)
 
     evolucao = df.groupby("Mes")["Valor"].sum().reset_index()
 
