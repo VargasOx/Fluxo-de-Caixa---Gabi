@@ -8,29 +8,45 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # =========================
-# LOGIN CONFIG
+# LOGIN
 # =========================
-USUARIOS = {
-    "admin": "123",
-    "marcelo": "abc123"
-}
+
+USUARIOS = st.secrets["USUARIOS"]
 
 def login():
+
     st.title("🔐 Login")
 
     usuario = st.text_input("Usuário")
-    senha = st.text_input("Senha", type="password")
+
+    senha = st.text_input(
+        "Senha",
+        type="password"
+    )
 
     if st.button("Entrar"):
-        if usuario in USUARIOS and USUARIOS[usuario] == senha:
+
+        if (
+            usuario in USUARIOS
+            and
+            USUARIOS[usuario] == senha
+        ):
+
             st.session_state["logado"] = True
+
             st.session_state["usuario"] = usuario
+
             st.rerun()
+
         else:
+
             st.error("Usuário ou senha inválidos")
 
+
 def logout():
+
     st.session_state["logado"] = False
+
     st.rerun()
 
 # =========================
